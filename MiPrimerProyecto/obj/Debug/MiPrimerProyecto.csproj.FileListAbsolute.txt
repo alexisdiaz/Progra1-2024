@@ -5,3 +5,10 @@ C:\Users\Alexis Diaz\source\repos\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrim
 C:\Users\Alexis Diaz\source\repos\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.csproj.CoreCompileInputs.cache
 C:\Users\Alexis Diaz\source\repos\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.exe
 C:\Users\Alexis Diaz\source\repos\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.pdb
+C:\Users\Alexis_Diaz\Source\Repos\Progra1-2024\MiPrimerProyecto\bin\Debug\MiPrimerProyecto.exe.config
+C:\Users\Alexis_Diaz\Source\Repos\Progra1-2024\MiPrimerProyecto\bin\Debug\MiPrimerProyecto.exe
+C:\Users\Alexis_Diaz\Source\Repos\Progra1-2024\MiPrimerProyecto\bin\Debug\MiPrimerProyecto.pdb
+C:\Users\Alexis_Diaz\Source\Repos\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.csproj.AssemblyReference.cache
+C:\Users\Alexis_Diaz\Source\Repos\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.csproj.CoreCompileInputs.cache
+C:\Users\Alexis_Diaz\Source\Repos\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.exe
+C:\Users\Alexis_Diaz\Source\Repos\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.pdb
