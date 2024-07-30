@@ -5,76 +5,56 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MiPrimerProyecto
-    //Ejercicio de nota de computo y obtencion de nota final de ciclo.
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Computo 1 ");
-            Console.WriteLine();
+            //Estructuras de control.
+            //1. if, ejercicio. Pedir al usuario la edad si es mayor de edad que diga bienvenido.
+            string continuar = "s";
+            while (continuar == "s")
+            {
+                Console.Write("Edad: ");
+                int edad = int.Parse(Console.ReadLine());
+                if (edad < 0)
+                {
+                    Console.WriteLine("Edad Incorrecta");
+                }
+                else if (edad <= 2)
 
-            Console.WriteLine("laboratorio 1: ");
-            double lab1 = double.Parse(Console.ReadLine());
+                {
+                    Console.WriteLine("Eres un bebe");
+                }
+                else if (edad <= 12)
 
+                {
+                    Console.WriteLine("Eres un niño");
+                }
+                else
+                if (edad <= 18)
+                {
+                    Console.WriteLine("Eres un adolescente");
 
-            Console.WriteLine("laboratorio 2: ");
-            double lab2 = double.Parse(Console.ReadLine());
+                }
+                else if (edad <= 65)
 
-            Console.WriteLine("Parcial 1: ");
-            double Parcial1 = double.Parse(Console.ReadLine());
+                {
+                    Console.WriteLine("Bienvenido al mundo de las responsabilidades.");
+                }
+                else if (edad <= 80)
+                {
+                    Console.WriteLine("Eres un adulto mayor");
+                }
+                else
+                {
+                    Console.WriteLine("Larga Vida");
+                }
 
-            Console.WriteLine();
-
-            double c1 = lab1 * 30 / 100 + lab2 * 30 / 100 + Parcial1 * 40 / 100;
-            Console.WriteLine("La nota de Computo 1 es: {0}", c1);
-
-            Console.WriteLine();
-
-            Console.WriteLine("Computo 2 ");
-            Console.WriteLine();
-
-            Console.WriteLine("laboratorio 1: ");
-            lab1 = double.Parse(Console.ReadLine());
-
-            Console.WriteLine("laboratorio 2: ");
-            lab2 = double.Parse(Console.ReadLine());
-
-            Console.WriteLine("Parcial 2: ");
-            Parcial1 = double.Parse(Console.ReadLine());
-
-            Console.WriteLine();
-
-            double c2 = lab1 * 30 / 100 + lab2 * 30 / 100 + Parcial1 * 40 / 100;
-            Console.WriteLine("La nota de Computo 2 es: {0}", c2);
-
-            Console.WriteLine();
-
-            Console.WriteLine("Computo 3 ");
-            Console.WriteLine();
-
-
-            Console.WriteLine("laboratorio 1: ");
-            lab1 = double.Parse(Console.ReadLine());
-
-            Console.WriteLine("laboratorio 2: ");
-            lab2 = double.Parse(Console.ReadLine());
-
-            Console.WriteLine("Parcial 3: ");
-            Parcial1 = double.Parse(Console.ReadLine());
-
-            Console.WriteLine();
-
-            double c3 = lab1 * 30 / 100 + lab2 * 30 / 100 + Parcial1 * 40 / 100;
-            Console.WriteLine("La nota de Computo 3 es: {0}", c3);
-
-            Console.WriteLine();
-
-            double Final = (c1 + c2 + c3) / 3;
-            Console.WriteLine("La nota final es: {0}", Final);
-
-            Console.ReadLine();
-
+                Console.WriteLine("Presione s para continuar, sino cualquier tecla");
+                //Pausa.
+                continuar = Console.ReadLine();
+            }
         }
     }
 }
