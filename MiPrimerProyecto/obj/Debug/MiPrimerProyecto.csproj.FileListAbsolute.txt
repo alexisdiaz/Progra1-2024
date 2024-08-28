@@ -19,3 +19,10 @@ C:\Users\Alexis\source\repos\Progra1-2024\Progra1-2024\MiPrimerProyecto\obj\Debu
 C:\Users\Alexis\source\repos\Progra1-2024\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.csproj.CoreCompileInputs.cache
 C:\Users\Alexis\source\repos\Progra1-2024\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.exe
 C:\Users\Alexis\source\repos\Progra1-2024\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.pdb
+C:\Users\alexi\Source\Repos\Progra1-2024\MiPrimerProyecto\bin\Debug\MiPrimerProyecto.exe.config
+C:\Users\alexi\Source\Repos\Progra1-2024\MiPrimerProyecto\bin\Debug\MiPrimerProyecto.exe
+C:\Users\alexi\Source\Repos\Progra1-2024\MiPrimerProyecto\bin\Debug\MiPrimerProyecto.pdb
+C:\Users\alexi\Source\Repos\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.csproj.AssemblyReference.cache
+C:\Users\alexi\Source\Repos\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.csproj.CoreCompileInputs.cache
+C:\Users\alexi\Source\Repos\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.exe
+C:\Users\alexi\Source\Repos\Progra1-2024\MiPrimerProyecto\obj\Debug\MiPrimerProyecto.pdb
