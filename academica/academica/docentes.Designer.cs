@@ -62,6 +62,7 @@
             this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnregresar = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdDatosDocente)).BeginInit();
             this.grbEdicionDocente.SuspendLayout();
             this.grbNavegacionDocente.SuspendLayout();
@@ -415,11 +416,21 @@
             this.btnregresar.UseVisualStyleBackColor = true;
             this.btnregresar.Click += new System.EventHandler(this.btnregresar_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(697, 380);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // docentes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(898, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnregresar);
             this.Controls.Add(this.lblBuscarDocente);
             this.Controls.Add(this.txtBuscarDocente);
@@ -477,5 +488,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
         private System.Windows.Forms.Button btnregresar;
+        private System.Windows.Forms.Button button1;
     }
 }
