@@ -21,5 +21,30 @@ namespace academica
         {
 
         }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void alumnosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alumnos objForm = new alumnos();
+         
+            objForm.Show();
+        }
+
+        private void materiasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            materias objForm = new materias();
+           
+            objForm.Show();
+        }
+
+        private void docentesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            docentes objForm = new docentes();
+            objForm.Show();
+        }
     }
 }
