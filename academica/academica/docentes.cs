@@ -208,5 +208,10 @@ namespace academica
             Form1 objForm = new Form1();
             this.Close();
         }
+
+        private void cboxEspecialidadDocente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

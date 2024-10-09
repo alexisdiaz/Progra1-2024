@@ -31,6 +31,11 @@
             this.lblBuscarDocente = new System.Windows.Forms.Label();
             this.txtBuscarDocente = new System.Windows.Forms.TextBox();
             this.grdDatosDocente = new System.Windows.Forms.DataGridView();
+            this.IdDocente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grbEdicionDocente = new System.Windows.Forms.GroupBox();
             this.btnEliminarDocente = new System.Windows.Forms.Button();
             this.btnModificarDocente = new System.Windows.Forms.Button();
@@ -42,6 +47,10 @@
             this.btnAnteriorDocente = new System.Windows.Forms.Button();
             this.btnPrimeroDocente = new System.Windows.Forms.Button();
             this.grbDatosDocente = new System.Windows.Forms.GroupBox();
+            this.cboxEspecialidadDocente = new System.Windows.Forms.ComboBox();
+            this.txtEspecialidadDocente = new System.Windows.Forms.Label();
+            this.lblEmailDocente = new System.Windows.Forms.Label();
+            this.txtEmailDocente = new System.Windows.Forms.TextBox();
             this.lblDuiDocente = new System.Windows.Forms.Label();
             this.txtDuiDocente = new System.Windows.Forms.TextBox();
             this.lblTelefonoDocente = new System.Windows.Forms.Label();
@@ -52,15 +61,6 @@
             this.txtNombreDocente = new System.Windows.Forms.TextBox();
             this.lblCodigoDocente = new System.Windows.Forms.Label();
             this.txtCodigoDocente = new System.Windows.Forms.TextBox();
-            this.lblEmailDocente = new System.Windows.Forms.Label();
-            this.txtEmailDocente = new System.Windows.Forms.TextBox();
-            this.txtEspecialidadDocente = new System.Windows.Forms.Label();
-            this.cboxEspecialidadDocente = new System.Windows.Forms.ComboBox();
-            this.IdDocente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnregresar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdDatosDocente)).BeginInit();
@@ -104,6 +104,42 @@
             this.grdDatosDocente.Size = new System.Drawing.Size(464, 252);
             this.grdDatosDocente.TabIndex = 20;
             this.grdDatosDocente.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdDatosDocente_CellClick);
+            // 
+            // IdDocente
+            // 
+            this.IdDocente.DataPropertyName = "IdDocente";
+            this.IdDocente.HeaderText = "ID";
+            this.IdDocente.Name = "IdDocente";
+            this.IdDocente.ReadOnly = true;
+            this.IdDocente.Visible = false;
+            // 
+            // codigo
+            // 
+            this.codigo.DataPropertyName = "codigo";
+            this.codigo.HeaderText = "CODIGO";
+            this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
+            // 
+            // nombre
+            // 
+            this.nombre.DataPropertyName = "nombre";
+            this.nombre.HeaderText = "NOMBRE";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // direccion
+            // 
+            this.direccion.DataPropertyName = "direccion";
+            this.direccion.HeaderText = "DIRECCION";
+            this.direccion.Name = "direccion";
+            this.direccion.ReadOnly = true;
+            // 
+            // telefono
+            // 
+            this.telefono.DataPropertyName = "telefono";
+            this.telefono.HeaderText = "TELEFONO";
+            this.telefono.Name = "telefono";
+            this.telefono.ReadOnly = true;
             // 
             // grbEdicionDocente
             // 
@@ -242,6 +278,49 @@
             this.grbDatosDocente.TabStop = false;
             this.grbDatosDocente.Text = "Datos Docentes";
             // 
+            // cboxEspecialidadDocente
+            // 
+            this.cboxEspecialidadDocente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxEspecialidadDocente.FormattingEnabled = true;
+            this.cboxEspecialidadDocente.Items.AddRange(new object[] {
+            "Informatico",
+            "Contador",
+            "Matematico",
+            "Abogado",
+            "Salud"});
+            this.cboxEspecialidadDocente.Location = new System.Drawing.Point(161, 289);
+            this.cboxEspecialidadDocente.Name = "cboxEspecialidadDocente";
+            this.cboxEspecialidadDocente.Size = new System.Drawing.Size(221, 21);
+            this.cboxEspecialidadDocente.TabIndex = 13;
+            this.cboxEspecialidadDocente.SelectedIndexChanged += new System.EventHandler(this.cboxEspecialidadDocente_SelectedIndexChanged);
+            // 
+            // txtEspecialidadDocente
+            // 
+            this.txtEspecialidadDocente.AutoSize = true;
+            this.txtEspecialidadDocente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEspecialidadDocente.Location = new System.Drawing.Point(31, 287);
+            this.txtEspecialidadDocente.Name = "txtEspecialidadDocente";
+            this.txtEspecialidadDocente.Size = new System.Drawing.Size(123, 24);
+            this.txtEspecialidadDocente.TabIndex = 12;
+            this.txtEspecialidadDocente.Text = "Especialidad:";
+            // 
+            // lblEmailDocente
+            // 
+            this.lblEmailDocente.AutoSize = true;
+            this.lblEmailDocente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmailDocente.Location = new System.Drawing.Point(31, 244);
+            this.lblEmailDocente.Name = "lblEmailDocente";
+            this.lblEmailDocente.Size = new System.Drawing.Size(62, 24);
+            this.lblEmailDocente.TabIndex = 11;
+            this.lblEmailDocente.Text = "Email:";
+            // 
+            // txtEmailDocente
+            // 
+            this.txtEmailDocente.Location = new System.Drawing.Point(131, 248);
+            this.txtEmailDocente.Name = "txtEmailDocente";
+            this.txtEmailDocente.Size = new System.Drawing.Size(251, 20);
+            this.txtEmailDocente.TabIndex = 10;
+            // 
             // lblDuiDocente
             // 
             this.lblDuiDocente.AutoSize = true;
@@ -326,84 +405,6 @@
             this.txtCodigoDocente.Name = "txtCodigoDocente";
             this.txtCodigoDocente.Size = new System.Drawing.Size(100, 20);
             this.txtCodigoDocente.TabIndex = 0;
-            // 
-            // lblEmailDocente
-            // 
-            this.lblEmailDocente.AutoSize = true;
-            this.lblEmailDocente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmailDocente.Location = new System.Drawing.Point(31, 244);
-            this.lblEmailDocente.Name = "lblEmailDocente";
-            this.lblEmailDocente.Size = new System.Drawing.Size(62, 24);
-            this.lblEmailDocente.TabIndex = 11;
-            this.lblEmailDocente.Text = "Email:";
-            // 
-            // txtEmailDocente
-            // 
-            this.txtEmailDocente.Location = new System.Drawing.Point(131, 248);
-            this.txtEmailDocente.Name = "txtEmailDocente";
-            this.txtEmailDocente.Size = new System.Drawing.Size(251, 20);
-            this.txtEmailDocente.TabIndex = 10;
-            // 
-            // txtEspecialidadDocente
-            // 
-            this.txtEspecialidadDocente.AutoSize = true;
-            this.txtEspecialidadDocente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEspecialidadDocente.Location = new System.Drawing.Point(31, 287);
-            this.txtEspecialidadDocente.Name = "txtEspecialidadDocente";
-            this.txtEspecialidadDocente.Size = new System.Drawing.Size(123, 24);
-            this.txtEspecialidadDocente.TabIndex = 12;
-            this.txtEspecialidadDocente.Text = "Especialidad:";
-            // 
-            // cboxEspecialidadDocente
-            // 
-            this.cboxEspecialidadDocente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxEspecialidadDocente.FormattingEnabled = true;
-            this.cboxEspecialidadDocente.Items.AddRange(new object[] {
-            "Informatico",
-            "Contador",
-            "Matematico",
-            "Abogado",
-            "Salud"});
-            this.cboxEspecialidadDocente.Location = new System.Drawing.Point(161, 289);
-            this.cboxEspecialidadDocente.Name = "cboxEspecialidadDocente";
-            this.cboxEspecialidadDocente.Size = new System.Drawing.Size(221, 21);
-            this.cboxEspecialidadDocente.TabIndex = 13;
-            // 
-            // IdDocente
-            // 
-            this.IdDocente.DataPropertyName = "IdDocente";
-            this.IdDocente.HeaderText = "ID";
-            this.IdDocente.Name = "IdDocente";
-            this.IdDocente.ReadOnly = true;
-            this.IdDocente.Visible = false;
-            // 
-            // codigo
-            // 
-            this.codigo.DataPropertyName = "codigo";
-            this.codigo.HeaderText = "CODIGO";
-            this.codigo.Name = "codigo";
-            this.codigo.ReadOnly = true;
-            // 
-            // nombre
-            // 
-            this.nombre.DataPropertyName = "nombre";
-            this.nombre.HeaderText = "NOMBRE";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // direccion
-            // 
-            this.direccion.DataPropertyName = "direccion";
-            this.direccion.HeaderText = "DIRECCION";
-            this.direccion.Name = "direccion";
-            this.direccion.ReadOnly = true;
-            // 
-            // telefono
-            // 
-            this.telefono.DataPropertyName = "telefono";
-            this.telefono.HeaderText = "TELEFONO";
-            this.telefono.Name = "telefono";
-            this.telefono.ReadOnly = true;
             // 
             // btnregresar
             // 
