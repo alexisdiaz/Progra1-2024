@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gestor_Descargas", "Gestor_Descargas\Gestor_Descargas.csproj", "{45110E81-1266-46E1-BB90-38310D15209A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45110E81-1266-46E1-BB90-38310D15209A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45110E81-1266-46E1-BB90-38310D15209A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45110E81-1266-46E1-BB90-38310D15209A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45110E81-1266-46E1-BB90-38310D15209A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14E3EE72-43D4-4D81-BF10-D0B35E9AED5B}
+	EndGlobalSection
+EndGlobal

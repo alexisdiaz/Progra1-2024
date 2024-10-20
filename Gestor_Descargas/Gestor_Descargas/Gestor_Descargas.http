@@ -1,0 +1,6 @@
+@Gestor_Descargas_HostAddress = http://localhost:5202
+
+GET {{Gestor_Descargas_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
