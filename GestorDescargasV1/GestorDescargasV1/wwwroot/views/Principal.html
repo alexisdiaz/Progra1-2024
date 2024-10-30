@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Programas Disponibles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="card text-bg-dark mb-3">
+                    <div class="card-header">Ingresar Programa</div>
+                    <div class="card-body">
+                        <form id="frmIngresarPrograma" data-idprograma="0" data-accion="nuevo">
+                            <div class="row">
+                                <div class="col-3 col-md-2">NOMBRE</div>
+                                <div class="col-9 col-md-4">
+                                    <input type="text" class="form-control" id="txtNombrePrograma" name="txtNombrePrograma" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 col-md-2">VERSION</div>
+                                <div class="col-9 col-md-4">
+                                    <input type="text" class="form-control" id="txtVersionPrograma" name="txtVersionPrograma" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 col-md-2">URL</div>
+                                <div class="col-9 col-md-4">
+                                    <input type="text" class="form-control" id="txtURLPrograma" name="txtURLPrograma" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 col-md-2">PESO</div>
+                                <div class="col-9 col-md-4">
+                                    <input type="text" class="form-control" id="txtPESOPrograma" name="txtPesoPrograma" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="submit" class="btn btn-primary" value="Guardar">
+                                    <input type="reset" class="btn btn-warning" value="Limpiar">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card text-bg-dark mb-3">
+                    <div class="card-header">Explorar</div>
+                    <div class="card-body">
+                        <table class="table table-dark table-hover" id="tblListadoProgramas">
+                            <thead>
+                                <tr>
+                                    <th>nombre</th>
+                                    <th>version</th>
+                                    <th>url</th>
+                                    <th>peso</th>
+                                    <th></th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+                document.addEventListener("DOMContentLoaded", event => {
+                    listarProgramas();
+                    frmIngresarPrograma.addEventListener('submit', e => {
+                        e.preventDefault();
+                        guardarProgramas(event);
+
+                    });
+                });
+       async function guardarProgramas() {
+          
+           let datos = {
+               nombre: txtNombrePrograma.value,
+               version: txtVersionPrograma.value,
+               url: txtURLPrograma.value,
+               peso: txtPESOPrograma.value,
+
+           },
+               method = "POST",
+               url = "https://localhost:7166/api/Explorar";
+           if (frmIngresarPrograma.dataset.accion == "modificar") {
+               url = `https://localhost:7166/api/Explorar/${frmIngresarPrograma.dataset.idprograma}`;
+               datos.idPrograma = frmIngresarPrograma.dataset.idprograma;
+               method = "PUT";
+           } 
+           const respuesta = await fetch(url, {
+               method,
+               headers: {
+                   "Content-Type": "application/json"
+               },
+               body: JSON.stringify(datos)
+           }), Programas = await respuesta.json();
+           if (Programas && Programas?.idPrograma > 0) {
+               listarProgramas();
+               limpiarDatosProgramas();
+           } else { 
+               console.log(Programas);
+           }
+           
+       } 
+                async function listarProgramas() {
+                    const respuesta = await fetch("https://localhost:7166/api/Explorar", {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    }), explorar = await respuesta.json();
+                    let fila = "";
+                    explorar.forEach(Programas => {
+                        fila += `<tr onClick ='modificarPrograma(${JSON.stringify(Programas)})'>
+                            <td>${Programas.nombre}</td>
+                            <td>${Programas.version}</td>
+                            <td>${Programas.url}</td>
+                            <td>${Programas.peso}</td>
+                            <td>
+                                  <button class="btn btn-danger" onClick='EliminarPrograma(${JSON.stringify(Programas)})'>DEL</button></td>
+                            
+                       </tr>`;
+                    });
+                    document.querySelector("#tblListadoProgramas > tbody").innerHTML = fila;
+        }
+        function modificarPrograma(Programas) {
+            frmIngresarPrograma.dataset.idprograma = Programas.idPrograma
+            frmIngresarPrograma.dataset.accion = "modificar";
+            txtNombrePrograma.value = Programas.nombre;
+            txtVersionPrograma.value = Programas.version;
+            txtURLPrograma.value = Programas.url;
+            txtPESOPrograma.value = Programas.peso;
+        }
+        function limpiarDatosProgramas() {
+            frmIngresarPrograma.dataset.idprograma = 0;
+            frmIngresarPrograma.dataset.accion = "nuevo";
+            txtNombrePrograma.value = "";
+            txtVersionPrograma.value = "";
+            txtURLPrograma.value = "";
+            txtPESOPrograma.value = "";
+        }
+     
+        
+    </script>
+</body>
+</html>
