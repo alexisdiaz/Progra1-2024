@@ -5,8 +5,9 @@
         public int idPrograma { get; set; }
         public string nombre { get; set; }
         public string version { get; set; }
-        public string url { get; set; }
-        public double peso { get; set; }
+        public  string url { get; set; }
+        public  string peso { get; set; }
+        public byte[]? foto { get; set; }
 
     }
 }

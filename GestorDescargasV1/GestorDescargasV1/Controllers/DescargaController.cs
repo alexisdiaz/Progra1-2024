@@ -29,6 +29,7 @@ namespace GestorDescargasV1.Controllers
                 return await _context.Descargas.ToListAsync();
             }
 
+
             // GET: api/Descarga/5
             [HttpGet("{id}")]
             public async Task<ActionResult<Descarga>> GetDescarga(int id)
@@ -82,7 +83,6 @@ namespace GestorDescargasV1.Controllers
 
                 return CreatedAtAction("GetDescarga", new { id = descarga.idDescargas }, descarga);
             }
-
             // DELETE: api/Descarga/5
             [HttpDelete("{id}")]
             public async Task<IActionResult> DeleteDescarga(int id)

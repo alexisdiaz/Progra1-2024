@@ -37,6 +37,19 @@
                                     <input type="text" class="form-control" id="txtPESOPrograma" name="txtPesoPrograma" required>
                                 </div>
                             </div>
+                            <div class="row p-1">
+                                <div class="col-3 col-md-2">FOTO</div>
+                                <div class="col-9 col-md-4">
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text" for="imgFotoprograma">Upload</label>
+                                        <input type="file" class="form-control" id="imgFotoprograma"
+                                               accept="image/*" onchange="selecionarImg(this)">
+                                    </div>
+                                </div>
+                                <div class="col-3 col-md-4">
+                                    <img class="img-thumbnail rounded" id="imgPreVisualizacionFotoPrograma" />
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-12">
                                     <input type="submit" class="btn btn-primary" value="Guardar">
@@ -58,8 +71,8 @@
                                     <th>version</th>
                                     <th>url</th>
                                     <th>peso</th>
+                                    <th>foto</th>
                                     <th></th>
-                                    
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -69,66 +82,89 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"
+            integrity="sha512-MSOo1aY+3pXCOCdGAYoBZ6YGI0aragoQsg1mKKBHXCYPIWxamwOE7Drh+N5CPgGI5SA9IEKJiPjdfqWFWmZtRA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
     <script>
-                document.addEventListener("DOMContentLoaded", event => {
-                    listarProgramas();
-                    frmIngresarPrograma.addEventListener('submit', e => {
-                        e.preventDefault();
-                        guardarProgramas(event);
 
-                    });
-                });
-       async function guardarProgramas() {
-          
-           let datos = {
-               nombre: txtNombrePrograma.value,
-               version: txtVersionPrograma.value,
-               url: txtURLPrograma.value,
-               peso: txtPESOPrograma.value,
 
-           },
-               method = "POST",
-               url = "https://localhost:7166/api/Explorar";
-           if (frmIngresarPrograma.dataset.accion == "modificar") {
-               url = `https://localhost:7166/api/Explorar/${frmIngresarPrograma.dataset.idprograma}`;
-               datos.idPrograma = frmIngresarPrograma.dataset.idprograma;
-               method = "PUT";
-           } 
-           const respuesta = await fetch(url, {
-               method,
-               headers: {
-                   "Content-Type": "application/json"
-               },
-               body: JSON.stringify(datos)
-           }), Programas = await respuesta.json();
-           if (Programas && Programas?.idPrograma > 0) {
-               listarProgramas();
-               limpiarDatosProgramas();
-           } else { 
-               console.log(Programas);
-           }
-           
-       } 
-                async function listarProgramas() {
-                    const respuesta = await fetch("https://localhost:7166/api/Explorar", {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    }), explorar = await respuesta.json();
-                    let fila = "";
-                    explorar.forEach(Programas => {
-                        fila += `<tr onClick ='modificarPrograma(${JSON.stringify(Programas)})'>
-                            <td>${Programas.nombre}</td>
-                            <td>${Programas.version}</td>
-                            <td>${Programas.url}</td>
-                            <td>${Programas.peso}</td>
-                            <td>
-                                  <button class="btn btn-danger" onClick='EliminarPrograma(${JSON.stringify(Programas)})'>DEL</button></td>
-                            
-                       </tr>`;
-                    });
-                    document.querySelector("#tblListadoProgramas > tbody").innerHTML = fila;
+        document.addEventListener("DOMContentLoaded", event => {
+            listarProgramas();
+            frmIngresarPrograma.addEventListener('submit', e => {
+                e.preventDefault();
+                guardarProgramas(event);
+
+            });
+        });
+
+        var miArchivo;
+        function selecionarImg(file) {
+            let archivo = file.files[0];
+            const reader = new FileReader();
+            reader.onload = event => {
+                miArchivo = event.target.result;
+                $("#imgPreVisualizacionFotoPrograma").attr("src", miArchivo);
+            };
+            reader.readAsDataURL(archivo);
+        }
+        async function guardarProgramas() {
+
+            let datos = {
+                nombre: txtNombrePrograma.value,
+                version: txtVersionPrograma.value,
+                url: txtURLPrograma.value,
+                peso: txtPESOPrograma.value,
+                foto: miArchivo.split(",")[1]
+
+            },
+                method = "POST",
+                url = "https://localhost:7166/api/Explorar";
+            if (frmIngresarPrograma.dataset.accion == "modificar") {
+                url = `https://localhost:7166/api/Explorar/${frmIngresarPrograma.dataset.idprograma}`;
+                datos.idPrograma = frmIngresarPrograma.dataset.idprograma;
+                method = "PUT";
+            }
+            const respuesta = await fetch(url, {
+                method,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(datos)
+            }), Programas = await respuesta.json();
+            if (Programas && Programas?.idPrograma > 0) {
+                listarProgramas();
+                limpiarDatosProgramas();
+            } else {
+                console.log(Programas);
+            }
+
+        }
+        async function listarProgramas() {
+            const respuesta = await fetch("https://localhost:7166/api/Explorar", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }), explorar = await respuesta.json();
+            let fila = "";
+            explorar.forEach(Programas => {
+                fila += `<tr onClick ='modificarPrograma(${JSON.stringify(Programas)})'>
+                                    <td>${Programas.nombre}</td>
+                                    <td>${Programas.version}</td>
+                                    <td>${Programas.url}</td>
+                                    <td>${Programas.peso}</td>
+                                    <td><img width="80" src="${`data:image/png;base64,${Programas.foto}`}" class="img-thumbnail rounded"/></td>
+                                    <td>
+                                          <button class="btn btn-danger" onClick='EliminarPrograma(${JSON.stringify(Programas)})'>DEL</button></td>
+
+                               </tr>`;
+            });
+            document.querySelector("#tblListadoProgramas > tbody").innerHTML = fila;
         }
         function modificarPrograma(Programas) {
             frmIngresarPrograma.dataset.idprograma = Programas.idPrograma
@@ -137,6 +173,8 @@
             txtVersionPrograma.value = Programas.version;
             txtURLPrograma.value = Programas.url;
             txtPESOPrograma.value = Programas.peso;
+            miArchivo = `data:image/png;base64,${Programas.foto}`
+            $("#imgPreVisualizacionFotoPrograma").attr("src", miArchivo);
         }
         function limpiarDatosProgramas() {
             frmIngresarPrograma.dataset.idprograma = 0;
@@ -145,9 +183,11 @@
             txtVersionPrograma.value = "";
             txtURLPrograma.value = "";
             txtPESOPrograma.value = "";
+            $("#imgPreVisualizacionFotoPrograma").attr("src", "");
+            miArchivo = null;
         }
-     
-        
+
+
     </script>
 </body>
 </html>
