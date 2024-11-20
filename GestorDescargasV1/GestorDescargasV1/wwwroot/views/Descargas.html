@@ -9,16 +9,17 @@
         <h4 id="mensaje">Procesando descarga...</h4>
     </div>
 
-    <!-- Scripts -->
+
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const idPrograma = urlParams.get("idPrograma");
             const nombre = decodeURIComponent(urlParams.get("nombre"));
+            const nombreUsuario = decodeURIComponent(urlParams.get("nombreUsuario"));
             const estado = "completa";
 
             try {
-                // Enviar datos al servidor para registrar la descarga
+            
                 const respuesta = await fetch("https://localhost:7166/api/Descarga", {
                     method: "POST",
                     headers: {
@@ -27,6 +28,7 @@
                     body: JSON.stringify({
                         idPrograma: parseInt(idPrograma),
                         nombre: nombre,
+                        NombreUsuario: nombre,
                         estado: estado
                     })
                 });
@@ -35,7 +37,7 @@
                     throw new Error(`Error ${respuesta.status}: ${respuesta.statusText}`);
                 }
 
-                // Mostrar mensaje de éxito y redirigir al usuario
+          
                 document.getElementById("mensaje").textContent = "Descarga registrada exitosamente. Redirigiendo...";
                 setTimeout(() => {
                     window.location.href = "Explorar.html";

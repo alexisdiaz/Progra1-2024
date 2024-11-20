@@ -13,12 +13,16 @@ namespace GestorDescargasV1.Models
         public DbSet<Explorar> Programas { get; set; }
         public DbSet<Descarga> Descargas  { get; set; }
         public DbSet<ErroresD> Errores { get; set; }
+        public DbSet<Registro> Usuarios { get; set; }
+        public DbSet<Admins> Admins { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Explorar>().HasKey(e => e.idPrograma);
             modelBuilder.Entity<Descarga>().HasKey(e => e.idDescargas);
             modelBuilder.Entity<ErroresD>().HasKey(e => e.IdErrores);
+            modelBuilder.Entity<Registro>().HasKey(e => e.nombreUsuario);
+            modelBuilder.Entity<Admins>().HasKey(e => e.Nombre);
         }
     }
 }
