@@ -2,93 +2,215 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Ingresar Programas</title>
+    <title>Gestión de Programas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="StyleSubirArc.css"> 
 </head>
 <body>
-    ﻿<form id="frmBusquedaPrograma">
-        <div class="card text-bg-dark mb-3">
-            <div class="card-header">
-                <div class="d-flex">
-                    Consulta de Programas
-                    <div class="ms-auto">
-                        <button type="button" data-form="busqueda_programa" class="btn-close btn-close-white"></button>
+    <div class="container my-4">
+        <div class="row g-3 align-items-start">
+            <div class="col-12 col-lg-5">
+                <div class="card text-bg-dark shadow">
+                    <div class="card-header text-center">Ingresar Programa</div>
+                    <div class="card-body">
+                        <form id="frmIngresarPrograma" data-idprograma="0" data-accion="nuevo">
+                            <div class="mb-2">
+                                <label for="txtNombrePrograma" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="txtNombrePrograma" name="txtNombrePrograma" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="txtVersionPrograma" class="form-label">Versión</label>
+                                <input type="text" class="form-control" id="txtVersionPrograma" name="txtVersionPrograma" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="txtURLPrograma" class="form-label">URL</label>
+                                <input type="text" class="form-control" id="txtURLPrograma" name="txtURLPrograma" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="txtPESOPrograma" class="form-label">Peso</label>
+                                <input type="text" class="form-control" id="txtPESOPrograma" name="txtPesoPrograma" required>
+                            </div>
+                            <div class="mb-2">
+                                <label for="imgFotoprograma" class="form-label">Foto</label>
+                                <input type="file" class="form-control" id="imgFotoprograma" accept="image/*" onchange="selecionarImg(this)">
+                                <div class="text-center mt-2">
+                                    <img id="imgPreVisualizacionFotoPrograma" class="img-thumbnail rounded preview-img" />
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="reset" class="btn btn-warning">Limpiar</button>
+                                <button type="button" id="btnDelete" class="btn btn-danger d-none" onclick="EliminarPrograma()">DEL</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <table class="table table-dark table-hover" id="tblListadoProgramas">
-                    <thead>
-                        <tr>
-                            <th>BUSCAR</th>
-                            <th colspan="5"><input class="form-control" type="search" name="txtBuscarPrograma" id="txtBuscarPrograma" /></th>
-                        </tr>
-                        <tr>
-                            <th>nombre</th>
-                            <th>version</th>
-                            <th>url</th>
-                            <th>peso</th>
-                            <th></th>
-                            <th>foto</th>
-                        </tr>
-                    </thead>
-                    <tbody> </tbody>
-                </table>
+            <div class="col-7 col-lg-0">
+                <div class="card text-bg-dark shadow">
+                    <div class="card-header text-center">Explorar</div>
+                    <div class="card-body">
+                        <div class="table-container" style="max-height: 460px; overflow-y: auto;">
+                            <table class="table table-hover table-dark table-sm" id="tblListadoProgramas">
+                                <thead>
+                                    <tr>
+                                        <th>BUSCAR</th>
+
+                                        <th colspan="5"><input class="form-control" type="search" name="txtBuscarPrograma" id="txtBuscarPrograma" /></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Versión</th>
+                                        <th>Peso</th>
+                                        <th>Foto</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
-    listarProgramas();
-
-    txtBuscarDocente.addEventListener('keyup', e => {
-        listarDocentes(txtBuscarPrograma.value);
-    });
-
-    async function listarProgramas(buscar = '') {
-        let url = `/api/Explorar/${buscar}`;
-        const respuesta = await fetch(url, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }), explorar = await respuesta.json();
-        let filas = "";
-        explorar.forEach(Programas => {
-            filas += `<tr onClick='modificarDocente(${JSON.stringify(docente)})'>
-             <td>${Programas.nombre}</td>
-             <td>${Programas.version}</td>
-             <td>${Programas.url}</td>
-             <td>${Programas.peso}</td>
-             <td><img src="${`data:image/png;base64,${Programas.foto}`}" class=""/></td>
-             <td><button class="btn btn-danger" onClick='EliminarPrograma(${JSON.stringify(Programas)}, event)'>DEL</button></td>
-            </tr>`;
+        document.addEventListener("DOMContentLoaded", () => {
+            listarProgramas();
         });
-        document.querySelector("#tblListadoProgramas > tbody").innerHTML = filas;
-    }
-    function eliminarDocente(Programas, e) {
-        e.preventDefault();
-        limpiarDatosDocentes();
 
-        alertify.confirm("Eliminar docentes", `Esta seguro de eliminar a ${Prograamas.nombre}`, async(e) => {
-            let respuesta = await fetch(`/api/Explorar/${Programas.idPrograma}`, {
-                method: "DELETE",
+        txtBuscarPrograma.addEventListener('keyup', e => {
+            listarProgramas(txtBuscarPrograma.value)
+        });
+
+
+        frmIngresarPrograma.addEventListener('submit', e => {
+            e.preventDefault();
+            guardarProgramas();
+        });
+
+        frmIngresarPrograma.addEventListener('reset', e => {
+            e.preventDefault();
+            limpiarDatosProgramas();
+        });
+
+
+        var miArchivo;
+        function selecionarImg(file) {
+            let archivo = file.files[0];
+            const reader = new FileReader();
+            reader.onload = event => {
+                miArchivo = event.target.result;
+                $("#imgPreVisualizacionFotoPrograma").attr("src", miArchivo);
+            };
+            reader.readAsDataURL(archivo);
+        }
+
+        async function guardarProgramas() {
+            let datos = {
+                nombre: txtNombrePrograma.value,
+                version: txtVersionPrograma.value,
+                url: txtURLPrograma.value,
+                peso: txtPESOPrograma.value,
+                foto: miArchivo.split(",")[1]
+            },
+                method = "POST",
+                url = "https://localhost:7166/api/Explorar";
+
+            if (frmIngresarPrograma.dataset.accion == "modificar") {
+                url = `https://localhost:7166/api/Explorar/${frmIngresarPrograma.dataset.idprograma}`;
+                datos.idPrograma = frmIngresarPrograma.dataset.idprograma;
+                method = "PUT";
+            }
+
+            const respuesta = await fetch(url, {
+                method,
                 headers: {
-                    "Content-Type": "application/text"
-                }
-            }),
-                datos = await respuesta.text();//""
-            if (datos && datos.length > 0) {
-                alertify.error(`Nose pudo eliminar el programa: ${datos}`);
-                console.log(datos);
-            } else {
-                limpiarDatosDocentes();
-                listarDocentes();
-            }
-        }, () => {
-            alertify.warning("Eliminacion cancelada.");
-        });
-    }
-    </script>
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(datos)
+            });
 
+            const Programas = await respuesta.json();
+            if (Programas && Programas?.idPrograma > 0) {
+                listarProgramas();
+                limpiarDatosProgramas();
+            } else {
+                console.log(Programas);
+            }
+        }
+
+        async function listarProgramas() {
+            const respuesta = await fetch("https://localhost:7166/api/Explorar", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const explorar = await respuesta.json();
+            let fila = "";
+
+            explorar.forEach(Programas => {
+                fila += `<tr onClick ='modificarPrograma(${JSON.stringify(Programas)})'>
+                                             <td>${Programas.nombre}</td>
+                                             <td>${Programas.version}</td>
+                                             <td>${Programas.peso}</td>
+                                             <td><img width="80" src="${`data:image/png;base64,${Programas.foto}`}" class="img-thumbnail rounded"/></td>
+                                             <td>
+                                         </tr>`;
+            });
+
+        document.querySelector("#tblListadoProgramas > tbody").innerHTML = fila;
+}
+
+            
+
+        function modificarPrograma(Programas) {
+            frmIngresarPrograma.dataset.idprograma = Programas.idPrograma;
+            frmIngresarPrograma.dataset.accion = "modificar";
+            txtNombrePrograma.value = Programas.nombre;
+            txtVersionPrograma.value = Programas.version;
+            txtURLPrograma.value = Programas.url;
+            txtPESOPrograma.value = Programas.peso;
+            miArchivo = `data:image/png;base64,${Programas.foto}`;
+            $("#imgPreVisualizacionFotoPrograma").attr("src", miArchivo);
+            $("#btnDelete").removeClass("d-none");
+        }
+
+        function limpiarDatosProgramas() {
+            frmIngresarPrograma.dataset.idprograma = 0;
+            frmIngresarPrograma.dataset.accion = "nuevo";
+            txtNombrePrograma.value = "";
+            txtVersionPrograma.value = "";
+            txtURLPrograma.value = "";
+            txtPESOPrograma.value = "";
+            $("#imgPreVisualizacionFotoPrograma").attr("src", "");
+            miArchivo = null;
+            $("#btnDelete").addClass("d-none");
+
+
+        }
+
+        async function EliminarPrograma() {
+            const idPrograma = frmIngresarPrograma.dataset.idprograma;
+            if (idPrograma == 0) return;
+
+            const confirmacion = confirm("¿Estás seguro de que deseas eliminar este programa?");
+            if (!confirmacion) return;
+
+            const respuesta = await fetch(`https://localhost:7166/api/Explorar/${idPrograma}`, {
+                method: "DELETE"
+            });
+
+            if (respuesta.ok) {
+                alert("Programa eliminado correctamente");
+                listarProgramas();
+                limpiarDatosProgramas();
+            } else {
+                alert("Error al eliminar el programa");
+            }
+        }
+    </script>
 </body>
 </html>

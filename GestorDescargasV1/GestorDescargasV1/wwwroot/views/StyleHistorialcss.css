@@ -1,0 +1,75 @@
+﻿/* Fondo y estilo general */
+body {
+    background-color: #1a1a1a;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 90%;
+    margin: auto;
+}
+
+/* Estilo de la tarjeta */
+.card {
+    border: 1px solid #444;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Encabezado con gradiente */
+.card-header {
+    background: linear-gradient(90deg, #0078ff, #005fcc);
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Estilo de la tabla */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+tr:nth-child(odd) {
+    background-color: #2a2a2a;
+}
+
+tr:nth-child(even) {
+    background-color: #1e1e1e;
+}
+
+tr:hover {
+    background-color: #444;
+}
+
+/* Botón de actualización */
+.btn-refresh {
+    background-color: #0078ff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-refresh:hover {
+        background-color: #005fcc;
+    }
+
+    .btn-refresh:active {
+        background-color: #0046a8;
+    }

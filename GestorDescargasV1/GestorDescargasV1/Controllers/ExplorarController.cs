@@ -30,9 +30,8 @@ namespace GestorDescargasV1.Controllers
             {
                 return await _context.Programas.ToListAsync();
             }
-
             // GET: api/Explorar/5
-            [HttpGet("{id}")]
+            [HttpGet("{id:int}")]
             public async Task<ActionResult<Explorar>> GetExplorar(int id)
             {
                 var explorar = await _context.Programas.FindAsync(id);
@@ -44,35 +43,35 @@ namespace GestorDescargasV1.Controllers
 
                 return explorar;
             }
+            // GET: api/Explorar/buscar
+            [HttpGet("buscar/{buscar}")]
+            public async Task<ActionResult<IEnumerable<Explorar>>> BuscarProgramas(string buscar)
+            {
+                var consulta = _context.Programas.AsQueryable();
+
+                if (!string.IsNullOrWhiteSpace(buscar))
+                {
+                    consulta = consulta.Where(d => d.nombre.Contains(buscar));
+                }
+
+                return await consulta.ToListAsync();
+            }
+
+
+
+
 
             // PUT: api/Explorar/5
-            [HttpPut("{id}")]
-            public async Task<IActionResult> PutExplorar(int id, Explorar explorar)
+            [HttpGet("{id:int}")]
+            public async Task<ActionResult<Explorar>> GetProgramaById(int id)
             {
-                if (id != explorar.idPrograma)
+                var programa = await _context.Programas.FindAsync(id);
+                if (programa == null)
                 {
-                    return BadRequest();
+                    return NotFound();
                 }
 
-                _context.Entry(explorar).State = EntityState.Modified;
-
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ExplorarExists(id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return CreatedAtAction("GetExplorar", new { id = explorar.idPrograma }, explorar);
-                //return NoContent();
+                return programa;
             }
 
             // POST: api/Explorar

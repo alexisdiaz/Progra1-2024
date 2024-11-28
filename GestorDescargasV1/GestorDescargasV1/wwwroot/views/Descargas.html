@@ -12,14 +12,22 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
+            const usuarioLogueado = localStorage.getItem("usuarioLogueado");
+
+            if (!usuarioLogueado) {
+                document.getElementById("mensaje").textContent = "Error: Debes iniciar sesión para descargar.";
+                setTimeout(() => {
+                    window.location.href = "Login.html";
+                }, 2000);
+                return;
+            }
+
             const urlParams = new URLSearchParams(window.location.search);
             const idPrograma = urlParams.get("idPrograma");
-            const nombre = decodeURIComponent(urlParams.get("nombre"));
-            const nombreUsuario = decodeURIComponent(urlParams.get("nombreUsuario"));
+            const nombrePrograma = decodeURIComponent(urlParams.get("nombre"));
             const estado = "completa";
 
             try {
-            
                 const respuesta = await fetch("https://localhost:7166/api/Descarga", {
                     method: "POST",
                     headers: {
@@ -27,8 +35,8 @@
                     },
                     body: JSON.stringify({
                         idPrograma: parseInt(idPrograma),
-                        nombre: nombre,
-                        NombreUsuario: nombre,
+                        nombre: nombrePrograma,
+                        nombreUsuario: usuarioLogueado, // Aquí va el nombre del usuario logueado
                         estado: estado
                     })
                 });
@@ -37,7 +45,6 @@
                     throw new Error(`Error ${respuesta.status}: ${respuesta.statusText}`);
                 }
 
-          
                 document.getElementById("mensaje").textContent = "Descarga registrada exitosamente. Redirigiendo...";
                 setTimeout(() => {
                     window.location.href = "Explorar.html";

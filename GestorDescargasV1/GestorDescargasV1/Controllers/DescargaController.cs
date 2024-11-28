@@ -78,13 +78,6 @@ namespace GestorDescargasV1.Controllers
             [HttpPost]
             public async Task<ActionResult<Descarga>> PostDescarga(Descarga descarga)
             {
-                // Validar que el nombre del usuario esté presente
-                if (string.IsNullOrEmpty(descarga.NombreUsuario))
-                {
-                    return BadRequest("El nombre del usuario es obligatorio para registrar la descarga.");
-                }
-
-                // Registrar la descarga
                 _context.Descargas.Add(descarga);
                 await _context.SaveChangesAsync();
 
