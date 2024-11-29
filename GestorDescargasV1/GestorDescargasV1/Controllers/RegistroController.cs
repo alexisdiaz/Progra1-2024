@@ -27,6 +27,8 @@ namespace GestorDescargasV1.Controllers
             return await _context.Usuarios.ToListAsync();
         }
 
+
+
         // GET: api/Registro/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Registro>> GetRegistro(string id)

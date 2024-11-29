@@ -1,105 +1,151 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Programas Disponibles</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="StylePrueba.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Protegida</title>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const isAuthenticated = sessionStorage.getItem("isAuthenticated");
+            const userRole = sessionStorage.getItem("userRole");
+
+
+            if (!isAuthenticated || userRole !== "user") {
+                alert("No tienes permiso para acceder a esta página.");
+                window.location.href = "loggin.html";
+                document.body.style.display = "none";
+            }
+        });
+    </script>
+    <style>
+
+        body {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <div class="container my-5">
-        <div class="text-center text-bg-dark p-3 mb-4">
-            <h2>Programas Disponibles</h2>
-        </div>
-        <!-- Campo de búsqueda -->
-        <div class="mb-4">
-            <input type="text"
-                   id="txtBuscarPrograma"
-                   class="form-control"
-                   placeholder="Buscar programas por nombre"
-                   onkeyup="listarProgramas(this.value.trim())" />
-        </div>
-        <div class="program-grid" id="programGrid"></div>
-    </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Verificar si el usuario está autenticado
             const isAuthenticated = sessionStorage.getItem("isAuthenticated");
+            const userRole = sessionStorage.getItem("userRole");
 
-            if (!isAuthenticated) {
-                // Redirigir al login si no está autenticado
-                alert("Debes iniciar sesión para acceder a esta página.");
-                window.location.href = "loggin.html";
+            if (isAuthenticated && userRole === "admin") {
+                document.body.style.display = "block";
             }
         });
 
-        document.addEventListener("DOMContentLoaded", () => {
-            listarProgramas();
-        });
-
-        async function registrarYDescargar(url, idPrograma, nombre) {
-            try {
-                const estado = "completa";
-                const respuesta = await fetch("https://localhost:7166/api/Descarga", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        idPrograma: idPrograma,
-                        nombre: nombre,
-                        estado: estado
-                    })
-                });
-
-                if (!respuesta.ok) {
-                    throw new Error(`Error ${respuesta.status}: ${respuesta.statusText}`);
-                }
-
-                console.log("Descarga registrada exitosamente.");
-            } catch (error) {
-                console.error("Error al registrar la descarga:", error);
-                alert("Error al registrar la descarga. Intenta nuevamente.");
-                return;
-            }
-
-            window.open(url, "_blank");
-        }
-
-        async function listarProgramas() {
-            try {
-                const respuesta = await fetch("https://localhost:7166/api/Explorar", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                });
-
-                if (!respuesta.ok) {
-                    throw new Error(`Error ${respuesta.status}: ${respuesta.statusText}`);
-                }
-
-                const explorar = await respuesta.json();
-                let contenido = "";
-
-                explorar.forEach(programa => {
-                    contenido += `
-                            <div class="program-card">
-                                <img src="data:image/png;base64,${programa.foto}" alt="${programa.nombre}">
-                                <div class="program-info">
-                                    <p class="program-title">${programa.nombre}</p>
-                                        <p class="program-version">${programa.version}</p>
-                                           <p class="program-peso">${programa.peso}</p>
-                                    <button class="download-button" onclick="registrarYDescargar('${programa.url}', ${programa.idPrograma}, '${programa.nombre}')">Descargar</button>
+< !DOCTYPE html >
+            <html>
+                <head>
+                    <title>Programas Disponibles</title>
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+                        <link rel="stylesheet" href="StylePrueba.css">
+                        </head>
+                        <body>
+                            <div class="container my-5">
+                                <div class="text-center text-bg-dark p-3 mb-4">
+                                    <h2>Programas Disponibles</h2>
                                 </div>
+                                <!-- Campo de búsqueda -->
+                                <div class="mb-4">
+                                    <input type="text"
+                                        id="txtBuscarPrograma"
+                                        class="form-control"
+                                        placeholder="Buscar programas"
+                                        onkeyup="listarProgramas(this.value.trim())" />
+                                </div>
+                                <div class="program-grid" id="programGrid"></div>
                             </div>
-                        `;
-                });
+                            <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                // Verificar si el usuario está autenticado
+                const isAuthenticated = sessionStorage.getItem("isAuthenticated");
 
-                document.getElementById("programGrid").innerHTML = contenido;
-            } catch (error) {
-                console.error("Error al listar programas:", error);
+                                if (!isAuthenticated) {
+                                    // Redirigir al login si no está autenticado
+                                    alert("Debes iniciar sesión para acceder a esta página.");
+                                window.location.href = "loggin.html";
+                }
+            });
+
+            document.addEventListener("DOMContentLoaded", () => {
+                                    listarProgramas();
+            });
+
+                                async function registrarYDescargar(url, idPrograma, nombre) {
+                try {
+                    const estado = "completa";
+                                const respuesta = await fetch("https://localhost:7166/api/Descarga", {
+                                    method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                        },
+                                body: JSON.stringify({
+                                    idPrograma: idPrograma,
+                                nombre: nombre,
+                                estado: estado
+                        })
+                    });
+
+                                if (!respuesta.ok) {
+                        throw new Error(`Error ${respuesta.status}: ${respuesta.statusText}`);
+                    }
+
+                                console.log("Descarga registrada exitosamente.");
+                } catch (error) {
+                                    console.error("Error al registrar la descarga:", error);
+                                alert("Error al registrar la descarga. Intenta nuevamente.");
+                                return;
+                }
+
+                                window.open(url, "_blank");
             }
-        }
+
+                                async function listarProgramas(termino = "") {
+                try {
+                                    let url = "https://localhost:7166/api/Explorar";
+                                if (termino) {
+                                    url += `/buscar?nombre=${encodeURIComponent(termino)}`;
+                    }
+                                const respuesta = await fetch(url, {
+                                    method: "GET",
+                                headers: {
+                                    "Content-Type": "application/json"
+                        }
+                    });
+
+                                if (!respuesta.ok) {
+                        throw new Error(`Error ${respuesta.status}: ${respuesta.statusText}`);
+                    }
+
+                                const explorar = await respuesta.json();
+                                let contenido = "";
+
+                    explorar.forEach(programa => {
+                                    contenido += `
+                    <div class="program-card">
+                        <img src="data:image/png;base64,${programa.foto}" alt="${programa.nombre}">
+                        <div class="program-info">
+                            <p class="program-title">${programa.nombre}</p>
+                            <p class="program-version">${programa.version}</p>
+                            <p class="program-peso">${programa.peso}</p>
+                            <button class="download-button" onclick="registrarYDescargar('${programa.url}', ${programa.idPrograma}, '${programa.nombre}')">Descargar</button>
+                        </div>
+                    </div>
+                `;
+                    });
+
+                                document.getElementById("programGrid").innerHTML = contenido;
+                } catch (error) {
+                                    console.error("Error al listar programas:", error);
+                                document.getElementById("programGrid").innerHTML = "<p class='text-danger'>Error al cargar los programas.</p>";
+                }
+            }
+
     </script>
 </body>
 </html>

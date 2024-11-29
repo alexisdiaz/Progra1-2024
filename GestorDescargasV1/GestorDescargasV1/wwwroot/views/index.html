@@ -1,4 +1,46 @@
 ﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Protegida</title>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const isAuthenticated = sessionStorage.getItem("isAuthenticated");
+            const userRole = sessionStorage.getItem("userRole");
+
+
+            if (!isAuthenticated || userRole !== "admin") {
+                alert("No tienes permiso para acceder a esta página.");
+                window.location.href = "loggin.html";
+                document.body.style.display = "none";
+            }
+        });
+    </script>
+    <style>
+
+        body {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const isAuthenticated = sessionStorage.getItem("isAuthenticated");
+            const userRole = sessionStorage.getItem("userRole");
+
+            if (isAuthenticated && userRole === "admin") {
+                document.body.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Página Principal</title>
@@ -19,7 +61,7 @@
                     </div>
                 </div>
             </div>
-           
+
             <div class="col-md-4 text-center">
                 <div class="card">
                     <div class="card-body">
@@ -29,7 +71,7 @@
                     </div>
                 </div>
             </div>
-         
+
             <div class="col-md-4 text-center">
                 <div class="card">
                     <div class="card-body">
@@ -43,17 +85,19 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-Qe6T5m3fuQmQH6r9FIA8LjfDbzDheTOkz5p+jkSkTzMFv/7BUkXjJoW0YjE3SOyM" crossorigin="anonymous"></script>
-    <script>      
+    <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Verificar si el usuario está autenticado
             const isAuthenticated = sessionStorage.getItem("isAuthenticated");
+            const userRole = sessionStorage.getItem("userRole");
 
-            if (!isAuthenticated) {
-                // Redirigir al login si no está autenticado
-                alert("Debes iniciar sesión para acceder a esta página.");
+
+            if (!isAuthenticated || userRole !== "admin") {
+                alert("No tienes permiso para acceder a esta página.");
                 window.location.href = "loggin.html";
             }
         });
-</script>
+
+   
+    </script>
 </body>
 </html>

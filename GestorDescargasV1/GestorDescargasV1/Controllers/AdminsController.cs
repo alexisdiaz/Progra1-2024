@@ -27,6 +27,7 @@ namespace GestorDescargasV1.Controllers
             return await _context.Admins.ToListAsync();
         }
 
+
         // GET: api/Admins/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Admins>> GetAdmins(string id)
