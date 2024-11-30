@@ -68,7 +68,7 @@
             const password = document.querySelector(".formulario__login input[type='password']").value;
 
             try {
-                // Comprobar si el usuario es un admin
+             
                 const adminResponse = await fetch(`https://localhost:7166/api/Admins/${nombre}`);
                 if (adminResponse.ok) {
                     const admin = await adminResponse.json();
@@ -81,7 +81,7 @@
                     }
                 }
 
-                // Comprobar si el usuario es un usuario normal
+            
                 const userResponse = await fetch(`https://localhost:7166/api/Registro/${nombre}`);
                 if (userResponse.ok) {
                     const user = await userResponse.json();
@@ -102,14 +102,14 @@
         });
 
 
-        // Manejador para el formulario de registro
+        
         document.querySelector(".formulario__register").addEventListener("submit", async (event) => {
             event.preventDefault();
             const nombre = document.querySelector(".formulario__register input[type='text']").value;
             const password = document.querySelector(".formulario__register input[type='password']").value;
 
             if (!validarCamposSinEspacios(nombre, password)) {
-                return; // Detener el envío si no pasa la validación
+                return; 
             }
 
             try {
@@ -123,7 +123,7 @@
 
                 if (response.ok) {
                     alert("Registro exitoso. Ahora puedes iniciar sesión.");
-                    document.getElementById("btn__iniciar-sesion").click(); // Cambiar a la pantalla de login
+                    document.getElementById("btn__iniciar-sesion").click(); 
                 } else {
                     alert("Error al registrar el usuario. Intenta nuevamente.");
                 }
